@@ -151,7 +151,7 @@ class BuiltinProcedure(Procedure):
             args = args.second
         # BEGIN PROBLEM 4
         if self.use_env:
-            python_args.append(self.use_env)
+            python_args.append(env)
         try:
             return self.fn(*python_args)
         except TypeError as error:
@@ -214,7 +214,9 @@ def do_define_form(expressions, env):
     if scheme_symbolp(target):
         check_form(expressions, 2, 2)
         # BEGIN PROBLEM 6
-        "*** YOUR CODE HERE ***"
+        value = scheme_eval(expressions.second.first, env)
+        env.bindings[target] = value
+        return target
         # END PROBLEM 6
     elif isinstance(target, Pair) and scheme_symbolp(target.first):
         # BEGIN PROBLEM 10
