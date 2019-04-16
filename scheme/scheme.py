@@ -250,7 +250,8 @@ def do_lambda_form(expressions, env):
     formals = expressions.first
     check_formals(formals)
     # BEGIN PROBLEM 9
-    "*** YOUR CODE HERE ***"
+    body = expressions.second
+    return LambdaProcedure(formals, body, env)
     # END PROBLEM 9
 
 def do_if_form(expressions, env):
