@@ -45,11 +45,10 @@ test = {
           scm> (cdr '(1 2))
           (2)
           scm> (eval (cons 'car '('(4 2))))
-          46beb7deeeb5e9af1c8d785b12558317
-          # locked
+          4
           """,
           'hidden': False,
-          'locked': True
+          'locked': False
         }
       ],
       'scored': True,
@@ -62,29 +61,14 @@ test = {
         {
           'code': r"""
           >>> read_line(" 'x ")
-          d88f877a51ba10d1c3a834a690bb43e0
-          # locked
-          # choice: Pair('x', nil)
-          # choice: 'x'
-          # choice: Pair('quote', 'x')
-          # choice: Pair('quote', Pair('x', nil))
+          Pair('quote', Pair('x', nil))
           >>> read_line(" '(a b) ")
-          e16dd0e729d41b52ddd5d4d38cbfc7e6
-          # locked
-          # choice: Pair('a', Pair('b', nil))
-          # choice: Pair('quote', Pair(Pair('a', Pair('b', nil)), nil))
-          # choice: Pair('quote', Pair('a', 'b'))
-          # choice: Pair('quote', Pair('a', Pair('b', nil)))
+          Pair('quote', Pair(Pair('a', Pair('b', nil)), nil))
           >>> read_line(" `(,b) ")
-          c315b61bf342c663357b4788117c3f33
-          # locked
-          # choice: Pair('quasiquote', Pair(Pair(Pair('unquote', Pair('b', nil)), nil), nil))
-          # choice: Pair('unquote', Pair('b', nil))
-          # choice: Pair('quasiquote', Pair(Pair('unquote', Pair('b', nil)), nil))
-          # choice: Pair('quasiquote', Pair('unquote', Pair('b', nil)))
+          Pair('quasiquote', Pair(Pair(Pair('unquote', Pair('b', nil)), nil), nil))
           """,
           'hidden': False,
-          'locked': True
+          'locked': False
         },
         {
           'code': r"""
