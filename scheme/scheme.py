@@ -115,7 +115,16 @@ class Frame(object):
         <{a: 1, b: 2, c: 3} -> <Global Frame>>
         """
         # BEGIN PROBLEM 11
-        "*** YOUR CODE HERE ***"
+        child_frame = Frame(self)
+        while formals is not nil and vals is not nil:
+            child_frame.define(formals.first, vals.first)
+            formals = formals.second
+            vals = vals.second
+        if formals is not nil and vals is nil:
+            raise SchemeError("too few values given")
+        if formals is nil and vals is not nil:
+            raise SchemeError("too many values given")
+        return child_frame
         # END PROBLEM 11
 
 ##############
