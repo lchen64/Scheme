@@ -318,7 +318,7 @@ def do_cond_form(expressions, env):
             test = scheme_eval(clause.first, env)
         if scheme_truep(test):
             # BEGIN PROBLEM 14
-            if clause.second == nil: #does not have a corresponding result
+            if clause.second == nil: 
                 return test
             else:
                 return eval_all(clause.second,env)
@@ -486,7 +486,7 @@ def do_mu_form(expressions, env):
     check_formals(formals)
     # BEGIN PROBLEM 16
     second = expressions.second
-    return MuProcedure(formals,second)
+    return MuProcedure(formals, second)
     # END PROBLEM 16
 
 SPECIAL_FORMS['mu'] = do_mu_form
