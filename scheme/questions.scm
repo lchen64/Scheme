@@ -32,7 +32,10 @@
 ;; List all ways to make change for TOTAL with DENOMS
 (define (list-change total denoms)
   ; BEGIN PROBLEM 18
-  'replace-this-line
+  (cond ((null? denoms) '(nil))
+  ((< total (car denoms)) (list-change total (cdr denoms)))
+  ((= total (car denoms)) (append `((,(car denoms))) (list-change total (cdr denoms))))
+  (else (cons-all (car denoms) (list-change (- total (car denoms)) denoms)))))
   ; END PROBLEM 18
 
 ;; Problem 19
@@ -49,12 +52,12 @@
 (define (let-to-lambda expr)
   (cond ((atom? expr)
          ; BEGIN PROBLEM 19
-         'replace-this-line
+         expr
          ; END PROBLEM 19
          )
         ((quoted? expr)
          ; BEGIN PROBLEM 19
-         'replace-this-line
+         expr
          ; END PROBLEM 19
          )
         ((or (lambda? expr)
@@ -63,18 +66,18 @@
                (params (cadr expr))
                (body   (cddr expr)))
            ; BEGIN PROBLEM 19
-           'replace-this-line
+           `(,form ,params ,(car body))
            ; END PROBLEM 19
            ))
         ((let? expr)
          (let ((values (cadr expr))
                (body   (cddr expr)))
            ; BEGIN PROBLEM 19
-           'replace-this-line
+           (append `((lambda ,(car (zip values)) ,(car body))) (cadr (zip values)))
            ; END PROBLEM 19
            ))
         (else
          ; BEGIN PROBLEM 19
-         'replace-this-line
+         expr
          ; END PROBLEM 19
          )))
