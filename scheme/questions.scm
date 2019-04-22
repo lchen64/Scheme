@@ -6,16 +6,25 @@
 ; Some utility functions that you may find useful to implement.
 
 (define (cons-all first rests)
-  'replace-this-line)
+  (define add-first (lambda (lst) (append (list first) lst)))
+  (map add-first rests)
+  )
 
 (define (zip pairs)
-  'replace-this-line)
+  (define helper (lambda (pairs first second)
+  (if (null? pairs) (list first second)
+  (cons (cons (caar pairs) (car (zip (cdr pairs))))
+    (cons (cons (car (cdar pairs)) (cadr (zip (cdr pairs)))) nil)))))
+  (helper pairs nil nil))
 
 ;; Problem 17
 ;; Returns a list of two-element lists
 (define (enumerate s)
   ; BEGIN PROBLEM 17
-  'replace-this-line
+  (define helper (lambda (s index)
+  (if (null? s) nil
+  (cons (cons index (cons (car s) nil)) (helper (cdr s) (+ 1 index))))))
+  (helper s 0)
   )
   ; END PROBLEM 17
 
@@ -24,7 +33,6 @@
 (define (list-change total denoms)
   ; BEGIN PROBLEM 18
   'replace-this-line
-  )
   ; END PROBLEM 18
 
 ;; Problem 19
