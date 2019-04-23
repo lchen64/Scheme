@@ -35,6 +35,10 @@ def scheme_eval(expr, env, _=None): # Optional third argument is ignored
         # BEGIN PROBLEM 5
         operator = scheme_eval(expr.first, env)
         check_procedure(operator)
+        if isinstance(operator, MacroProcedure):
+            macro = scheme_eval(expr.first, env)
+            operands = expr.second
+            return scheme_eval(macro.apply_macro(operands, env), env)
         def eval_operand(operand):
             return scheme_eval(operand, env)
         operands = expr.second.map(eval_operand)
@@ -312,7 +316,7 @@ def do_cond_form(expressions, env):
             test = scheme_eval(clause.first, env)
         if scheme_truep(test):
             # BEGIN PROBLEM 14
-            if clause.second == nil: 
+            if clause.second == nil:
                 return test
             else:
                 return eval_all(clause.second,env)
@@ -350,7 +354,17 @@ def make_let_frame(bindings, env):
 def do_define_macro(expressions, env):
     """Evaluate a define-macro form."""
     # BEGIN Problem 21
-    "*** YOUR CODE HERE ***"
+    check_form(expressions, 2)
+    target = expressions.first
+    if isinstance(target, Pair) and scheme_symbolp(target.first):
+        name = target.first
+        formals = target.second
+        check_formals(formals)
+        body = expressions.second
+        env.bindings[name] = MacroProcedure(formals, body, env)
+        return name
+    else:
+        raise SchemeError("bad form")
     # END Problem 21
 
 
