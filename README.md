@@ -1,3 +1,1 @@
-# Scheme
-
-A Scheme Interpreter
+# SchemeScheme Interpreter
